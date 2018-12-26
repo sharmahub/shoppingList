@@ -1,0 +1,22 @@
+{
+  "name": "shoppinlist",
+  "version": "1.0.0",
+  "description": "shopping list desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharmahub/shoppingList.git"
+  },
+  "author": "Deepak Sharma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sharmahub/shoppingList/issues"
+  },
+  "homepage": "https://github.com/sharmahub/shoppingList#readme",
+  "dependencies": {
+    "electron": "^4.0.0"
+  }
+}
