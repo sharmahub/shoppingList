@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sharmahub/shoppingList#readme",
   "dependencies": {
-    "electron": "^4.0.0"
+    "electron": "^4.0.0",
+    "materialize-css": "^1.0.0-rc.2"
   }
 }
