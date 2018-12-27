@@ -2,7 +2,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const {app, BrowserWindow, Menu} = electron;
+const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 let mainWindow;
 let addWindow;
@@ -49,6 +49,12 @@ function createAddWindow(){
     })
 }
 
+//catch item:add
+ipcMain.on('item:add', function(e, item) {
+    mainWindow.webContents.send('item:add', item);
+    addWindow.close();
+});
+
 //create a menu template
 const mainMenuTemplate = [
     {
@@ -61,7 +67,10 @@ const mainMenuTemplate = [
                 }
             },
             {
-                label: 'Clear Item'
+                label: 'Clear Item',
+                click(){
+                    mainWindow.webContents.send('item:clear');
+                }
             },
             {
                 label: 'Quit',
@@ -78,3 +87,24 @@ const mainMenuTemplate = [
 if (process.platform == 'darwin') {
     mainMenutemplate.unshift({});    
 }
+
+// add developer tools option to menu if not in production
+if (process.env.NODE_ENV != 'production') {
+    mainMenuTemplate.push({
+        label: 'Developer Tools',
+        submenu:[
+            {
+                label: 'Toggle DevTools',
+                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+                click(item, focusedWindow){
+                    focusedWindow.toggleDevTools();
+                }
+            },
+            {
+                role:'reload'
+            }
+        ]
+    });
+}
+
+
